@@ -4,6 +4,8 @@ Ruby/ProgressBar is a text progress bar library for Ruby.
 
 It can indicate progress with percentage, a progress bar, and estimated remaining time.
 
+Documentation is available at [rdoc.info](http://rdoc.info/github/leonid-shevtsov/ruby-progressbar/frames)
+
 ## Examples
 
 Basic functionality:
