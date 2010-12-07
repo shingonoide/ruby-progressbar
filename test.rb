@@ -1,7 +1,7 @@
 require 'test/unit'
 require 'lib/progressbar'
 
-class ProgressBarTest < Test::Unit::TestCase
+class ProgressBarTest < Test::Unit::TestCase #:nodoc: all
   SleepUnit = 0.01
 
   def do_make_progress_bar (title, total)
@@ -108,7 +108,7 @@ class ProgressBarTest < Test::Unit::TestCase
   end
 end
 
-class ReversedProgressBarTest < ProgressBarTest
+class ReversedProgressBarTest < ProgressBarTest #:nodoc: all
   def do_make_progress_bar (title, total)
     ReversedProgressBar.new(title, total)
   end
