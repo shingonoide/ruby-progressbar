@@ -63,7 +63,10 @@ class ProgressBar
     @total = total
     @out = out
     @terminal_width = 80
-    @bar_mark = "o"
+    @bar_mark = "="
+    @bar_unmark = "."
+    @bar_start = "["
+    @bar_end = "]"
     @current = 0
     @previous = 0
     @current_percentage = 0
@@ -89,8 +92,17 @@ class ProgressBar
   # Time when the progress bar was started
   attr_accessor :start_time
 
-  # Character used to fill up the progress bar. Default: +o+
+  # Character used to fill up the progress bar. Default: +=+
   attr_writer   :bar_mark
+
+  # Character used to fill up the progress bar background. Default: +.+
+  attr_writer   :bar_unmark
+
+  # Character used on the start of progress bar. Default: +[+
+  attr_writer   :bar_start
+
+  # Character used on the end of progress bar. Default: +]+
+  attr_writer   :bar_end
 
   # Format for displaying a progress bar.
   # Default: <tt>"%-14s %3d%% %s %s"</tt>.
@@ -120,7 +132,7 @@ class ProgressBar
   # Clears the progress bar display
   def clear
     @out.print "\r"
-    @out.print(" " * (get_width - 1))
+    @out.print(@bar_unmark * (get_width - 1))
     @out.print "\r"
   end
 
@@ -192,7 +204,10 @@ class ProgressBar
 
   def fmt_bar
     bar_width = current_percentage * @terminal_width / 100
-    sprintf("|%s%s|", @bar_mark * bar_width, " " *  (@terminal_width - bar_width))
+    sprintf("%s%s%s%s", @bar_start,
+            @bar_mark * bar_width,
+            @bar_unmark * (@terminal_width - bar_width),
+            @bar_end)
   end
 
   def fmt_percentage
