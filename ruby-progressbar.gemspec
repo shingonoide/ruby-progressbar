@@ -2,7 +2,7 @@ require 'date'
 
 Gem::Specification.new do |s|
   s.name = "ruby-progressbar"
-  s.version = "0.1.0"
+  s.version = "0.1.1"
 
   s.authors = ["Satoru Takabayashi", 'Leonid Shevtsov']
   s.date = Date.today.to_s
