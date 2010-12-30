@@ -91,7 +91,7 @@ class ProgressBar
 
   # Character used to fill up the progress bar. Default: +o+
   attr_writer   :bar_mark
-  
+
   # Format for displaying a progress bar.
   # Default: <tt>"%-14s %3d%% %s %s"</tt>.
   attr_accessor :format
@@ -99,14 +99,14 @@ class ProgressBar
   # +fmt+ methods that get passsed to the format string.
   # Default: <tt>[:title, :percentage, :bar, :stat]</tt>
   attr_accessor :format_arguments
-  
+
   # The current completion percentage, from 0 to 100
   attr_reader :current_percentage
 
   # Returns true if the progress bar is at 100%
   attr_reader :finished
   alias_method :finished?, :finished
-  
+
   # Estimated Time of Arrival - time in seconds remaining until the progress bar reaches finish.
   def eta
     if @current == 0
@@ -172,7 +172,7 @@ class ProgressBar
   def inspect
     "#<#{self.class.to_s}:#{@current}/#{@total}>"
   end
-  
+
   # Block mode; accepts same parameters as #new, yields with the ProgressBar instance
   def self.block(*args)
     pbar = ProgressBar.new(*args)
@@ -181,7 +181,7 @@ class ProgressBar
   end
 
   protected
-  
+
   def fmt_eta
     if eta.nil?
       "ETA:  --:--:--"
@@ -220,20 +220,20 @@ class ProgressBar
     elapsed = Time.now - @start_time
     sprintf("Time: %s", format_time(elapsed))
   end
-  
+
   def eol
     if @finished then "\n" else "\r" end
   end
 
   def show
-    arguments = @format_arguments.map {|method| 
+    arguments = @format_arguments.map {|method|
       method = sprintf("fmt_%s", method)
       send(method)
     }
     line = sprintf(@format, *arguments)
 
     width = get_width
-    if line.length == width - 1 
+    if line.length == width - 1
       @out.print(line + eol)
       @out.flush
     elsif line.length >= width
@@ -261,5 +261,5 @@ class ProgressBar
     if @current_percentage != @previous_percentage || Time.now - @previous_time >= 1 || @finished
       show
     end
-  end  
+  end
 end
